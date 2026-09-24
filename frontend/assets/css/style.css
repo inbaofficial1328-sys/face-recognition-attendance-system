@@ -1,0 +1,211 @@
+/* =========================================
+   Face Recognition Attendance System
+   Login Page - Base Styling
+   ========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #4f46e5;
+    --primary-dark: #3730a3;
+    --text-main: #172033;
+    --text-muted: #667085;
+    --border: #e4e7ec;
+    --background: #f5f7fb;
+    --surface: #ffffff;
+}
+
+body {
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--background);
+    color: var(--text-main);
+}
+
+main {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+}
+
+section {
+    width: 100%;
+    max-width: 430px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 40px;
+    box-shadow: 0 12px 35px rgba(16, 24, 40, 0.08);
+}
+
+h1 {
+    font-size: 28px;
+    line-height: 1.2;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+}
+
+section > p:first-of-type {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+label {
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 8px;
+}
+
+input {
+    width: 100%;
+    height: 46px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0 14px;
+    font-size: 14px;
+    color: var(--text-main);
+    background: #ffffff;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+}
+
+input::placeholder {
+    color: #98a2b3;
+}
+
+button {
+    width: 100%;
+    height: 46px;
+    margin-top: 14px;
+    border: none;
+    border-radius: 10px;
+    background: var(--primary);
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background: var(--primary-dark);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+section > p:last-child {
+    margin-top: 24px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+@media (max-width: 520px) {
+    main {
+        padding: 16px;
+    }
+
+    section {
+        padding: 28px 22px;
+        border-radius: 14px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+}
+
+/* =========================================
+   Login Branding
+   ========================================= */
+
+.login-card {
+    position: relative;
+}
+
+.brand {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.brand-mark {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    background: var(--primary);
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.brand-label {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--primary);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+.brand h1 {
+    margin-bottom: 0;
+    font-size: 24px;
+}
+
+.login-description {
+    color: var(--text-muted);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+.login-notice {
+    margin-top: 24px;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 12px;
+}
+
+@media (max-width: 520px) {
+    .brand {
+        gap: 12px;
+    }
+
+    .brand-mark {
+        width: 42px;
+        height: 42px;
+        border-radius: 10px;
+    }
+
+    .brand h1 {
+        font-size: 21px;
+    }
+}
