@@ -46,7 +46,15 @@
                     autocomplete="current-password"
                 >
 
-                <button type="submit">Sign In</button>
+                <p id="login-error"
+                    class="login-error"
+                    role="alert"
+                    aria-live="assertive"
+                    hidden></p>
+
+                <button type="submit" id="login-button">
+                    Sign In
+            </button>
             </form>
 
             <p class="login-notice">Authorized users only</p>
@@ -54,5 +62,7 @@
         </section>
     </main>
 
+    <script src="../assets/js/config.js" defer></script>
+    <script src="../assets/js/login.js" defer></script>
 </body>
 </html>

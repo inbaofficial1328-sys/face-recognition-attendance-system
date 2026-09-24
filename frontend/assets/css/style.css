@@ -209,3 +209,34 @@ section > p:last-child {
         font-size: 21px;
     }
 }
+
+/* =========================================
+   Login Error Messages
+   ========================================= */
+
+.login-error {
+    padding: 12px 14px;
+    margin-top: 12px;
+    border: 1px solid #fecdca;
+    border-radius: 10px;
+    background: #fef3f2;
+    color: #b42318;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.login-error[hidden] {
+    display: none;
+}
+
+/* Login loading state */
+
+#login-button:disabled {
+    background: #a5a1e8;
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+#login-button:disabled:hover {
+    transform: none;
+}
