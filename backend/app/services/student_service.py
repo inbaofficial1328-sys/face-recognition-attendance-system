@@ -9,7 +9,7 @@ from backend.app.models.user import User
 from backend.app.models.student import Student
 from backend.app.models.department import Department
 from backend.app.models.academic_class import AcademicClass
-from backend.app.schemas.student import StudentCreate
+from backend.app.schemas.student import StudentCreate, StudentUpdate
 
 
 class DuplicateStudentError(ValueError):
@@ -138,3 +138,60 @@ def get_students(db: Session) -> list[Student]:
             select(Student).order_by(Student.id)
         ).all()
     )
+
+def get_student_by_id(
+    db: Session,
+    student_id: int,
+) -> Student | None:
+    return db.get(Student, student_id)
+
+
+def update_student(
+    db: Session,
+    student_id: int,
+    student_data: StudentUpdate,
+) -> Student:
+    student = db.get(Student, student_id)
+
+    if student is None:
+        raise LookupError("Student not found.")
+
+    changes = student_data.model_dump(exclude_unset=True)
+
+    if "academic_class_id" in changes:
+        class_id = changes.pop("academic_class_id")
+
+        if class_id is None:
+            raise ValueError(
+                "Academic class cannot be null."
+            )
+
+        academic_class = db.get(AcademicClass, class_id)
+
+        if academic_class is None:
+            raise LookupError("Academic class not found.")
+
+        department = db.get(
+            Department,
+            academic_class.department_id,
+        )
+
+        if department is None:
+            raise LookupError("Department not found.")
+
+        student.academic_class_id = academic_class.id
+        student.department = department.name
+        student.class_name = academic_class.name
+        student.semester = academic_class.semester
+
+    for field, value in changes.items():
+        setattr(student, field, value)
+
+    try:
+        db.commit()
+        db.refresh(student)
+    except Exception:
+        db.rollback()
+        raise
+
+    return student

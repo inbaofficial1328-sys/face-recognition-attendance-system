@@ -61,3 +61,24 @@ class StudentRegistrationResponse(BaseModel):
         "Deliver the temporary password securely and "
         "require the student to change it at first login."
     )
+
+
+class StudentUpdate(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    
+    academic_class_id: int | None = Field(
+        default=None,
+        gt=0,
+    )
+
+    date_of_birth: date | None = None
+
+    blood_group: str | None = Field(
+        default=None,
+        max_length=10,
+    )
+
+    phone_number: str | None = Field(
+        default=None,
+        max_length=15,
+    )

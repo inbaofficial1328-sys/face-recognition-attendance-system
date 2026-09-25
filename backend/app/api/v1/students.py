@@ -14,11 +14,14 @@ from backend.app.schemas.student import (
     StudentCreate,
     StudentResponse,
     StudentRegistrationResponse,
+    StudentUpdate,
 )
 from backend.app.services.student_service import (
     DuplicateStudentError,
+    get_student_by_id,
     get_students,
     register_student,
+    update_student,
 )
 
 router = APIRouter(
@@ -91,3 +94,51 @@ def list_students(
     current_user=Depends(require_roles("ADMIN", "HOD")),
 ):
     return get_students(db)
+
+@router.get(
+    "/{student_id}",
+    response_model=StudentResponse,
+)
+def get_student_profile(
+    student_id: int,
+    db: Session = Depends(get_db),
+    current_user=Depends(require_roles("ADMIN", "HOD")),
+):
+    student = get_student_by_id(db, student_id)
+
+    if student is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Student not found.",
+        )
+
+    return student
+
+@router.patch(
+    "/{student_id}",
+    response_model=StudentResponse,
+)
+def edit_student_profile(
+    student_id: int,
+    student_data: StudentUpdate,
+    db: Session = Depends(get_db),
+    current_user=Depends(require_roles("ADMIN")),
+):
+    try:
+        return update_student(
+            db,
+            student_id,
+            student_data,
+        )
+
+    except LookupError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=str(exc),
+        ) from exc
+
+    except ValueError as exc:
+        raise HTTPException(
+            status_code=status.HTTP_422_UNPROCESSABLE_CONTENT,
+            detail=str(exc),
+        ) from exc
