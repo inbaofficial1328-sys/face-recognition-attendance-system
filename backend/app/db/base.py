@@ -5,3 +5,4 @@ from backend.app.models.user import User
 from backend.app.models.student import Student
 from backend.app.models.department import Department
 from backend.app.models.academic_class import AcademicClass
+from backend.app.models.teacher_assignment import TeacherAssignment
