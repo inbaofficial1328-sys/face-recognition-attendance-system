@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | AttendancePro</title>
+    <link rel="stylesheet" href="../../assets/css/dashboard.css">
+    <script src="../../assets/js/config.js" defer></script>
+    <script src="../../assets/js/dashboard.js" defer></script>
+</head>
+<body>
+    <div class="dashboard-layout">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">AP</div>
+                <div>
+                    <h2>AttendancePro</h2>
+                    <small>College Management</small>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav" aria-label="Admin navigation">
+                <a href="#" class="active">Dashboard</a>
+                <a href="#">Students</a>
+                <a href="#">Teachers</a>
+                <a href="#">Departments</a>
+                <a href="#">Classes</a>
+                <a href="#">Timetables</a>
+                <a href="#">Attendance</a>
+                <a href="#">Semester Settings</a>
+                <a href="#">Fine Configuration</a>
+                <a href="#">Reports</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                Face Recognition Attendance System
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+
+            <header class="topbar">
+                <input
+                    type="search"
+                    placeholder="Search students, teachers, classes..."
+                    aria-label="Search"
+                    disabled
+                >
+
+                <div class="admin-profile">
+                    <span>Administrator</span>
+                    <div class="avatar">A</div>
+                </div>
+            </header>
+
+            <section class="page-content">
+
+                <div class="page-heading">
+                    <div>
+                        <p class="welcome">Welcome back!</p>
+                        <h1>Admin Dashboard</h1>
+                        <p>Manage your college attendance system.</p>
+                    </div>
+
+                    <div class="date-card">
+                        <span>Today</span>
+                        <strong id="current-date">Loading...</strong>
+                    </div>
+                </div>
+
+                <!-- Statistics -->
+                <section class="stats-grid" aria-label="Statistics">
+                    <article class="stat-card">
+                        <span>Total Students</span>
+                        <h2 id="total-students">—</h2>
+                        <small>Registered students</small>
+                    </article>
+
+                    <article class="stat-card">
+                        <span>Total Teachers</span>
+                        <h2 id="total-teachers">—</h2>
+                        <small>Registered teachers</small>
+                    </article>
+
+                    <article class="stat-card">
+                        <span>Active Classes</span>
+                        <h2 id="active-classes">—</h2>
+                        <small>Current semester</small>
+                    </article>
+
+                    <article class="stat-card">
+                        <span>Today's Attendance</span>
+                        <h2 id="today-attendance">—</h2>
+                        <small>Attendance percentage</small>
+                    </article>
+                </section>
+
+                <!-- Analytics -->
+                <section class="analytics-grid">
+                    <article class="panel">
+                        <h2>Attendance Overview</h2>
+                        <div class="chart-placeholder">
+                            Attendance chart will appear here.
+                        </div>
+                    </article>
+
+                    <article class="panel">
+                        <h2>Department-wise Attendance</h2>
+                        <div class="chart-placeholder">
+                            Department statistics will appear here.
+                        </div>
+                    </article>
+                </section>
+
+                <!-- Recent Information -->
+                <section class="information-grid">
+                    <article class="panel">
+                        <h2>Recent Students</h2>
+
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Student ID</th>
+                                        <th>Name</th>
+                                        <th>Department</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody id="recent-students">
+                                    <tr>
+                                        <td colspan="4">
+                                            Waiting for backend data.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </article>
+
+                    <article class="panel">
+                        <h2>Recent Activities</h2>
+                        <p id="recent-activities">
+                            Waiting for backend data.
+                        </p>
+                    </article>
+                </section>
+
+            </section>
+        </main>
+    </div>
+</body>
+</html>
+
+/* AttendancePro — Orange Warm Theme */
+
+:root {
+    --primary: #f97316;
+    --primary-dark: #ea580c;
+    --background: #fff7ed;
+    --surface: #ffffff;
+    --text: #292524;
+    --muted: #78716c;
+    --border: #fed7aa;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--background);
+    color: var(--text);
+}
+
+.dashboard-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+
+.sidebar {
+    width: 260px;
+    min-width: 260px;
+    min-height: 100vh;
+    padding: 24px 16px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 36px;
+}
+
+.brand-icon {
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: var(--primary);
+    color: white;
+    font-weight: bold;
+}
+
+.brand h2 {
+    font-size: 18px;
+}
+
+.brand small {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.sidebar-nav a {
+    padding: 13px 15px;
+    border-radius: 9px;
+    color: #57534e;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.sidebar-nav a:hover {
+    background: #ffedd5;
+    color: var(--primary-dark);
+}
+
+.sidebar-nav a.active {
+    background: var(--primary);
+    color: white;
+    font-weight: 600;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding: 16px 8px;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+/* Main content */
+
+.main-content {
+    flex: 1;
+    min-width: 0;
+}
+
+/* AttendancePro - Orange Warm Theme */
+
+:root {
+    --primary: #f97316;
+    --primary-dark: #ea580c;
+    --background: #fff7ed;
+    --surface: #ffffff;
+    --text: #292524;
+    --muted: #78716c;
+    --border: #fed7aa;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--background);
+    color: var(--text);
+}
+
+.dashboard-layout {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+
+.sidebar {
+    width: 260px;
+    min-width: 260px;
+    min-height: 100vh;
+    padding: 24px 16px;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 36px;
+}
+
+.brand-icon {
+    width: 46px;
+    height: 46px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    background: var(--primary);
+    color: white;
+    font-weight: bold;
+}
+
+.brand h2 {
+    font-size: 18px;
+}
+
+.brand small {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.sidebar-nav a {
+    padding: 13px 15px;
+    border-radius: 9px;
+    color: #57534e;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.sidebar-nav a:hover {
+    background: #ffedd5;
+    color: var(--primary-dark);
+}
+
+.sidebar-nav a.active {
+    background: var(--primary);
+    color: white;
+    font-weight: 600;
+}
+
+.sidebar-footer {
+    margin-top: auto;
+    padding: 16px 8px;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+/* Main content */
+
+.main-content {
+    flex: 1;
+    min-width: 0;
+}
