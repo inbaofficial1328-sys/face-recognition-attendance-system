@@ -47,3 +47,5 @@ exports/*.pdf
 demo_admin_password.txt
 
 demo_student_password.txt
+
+backups/

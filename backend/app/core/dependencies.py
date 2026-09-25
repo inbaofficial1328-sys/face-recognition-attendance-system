@@ -15,7 +15,7 @@ def get_db():
         yield db
     finally:
         db.close()
-        
+
 def get_current_user(
     credentials: HTTPAuthorizationCredentials | None = Depends(
         bearer_scheme
@@ -52,6 +52,19 @@ def get_current_user(
 
 from collections.abc import Callable
 
+def require_password_changed(
+    current_user: User = Depends(get_current_user),
+) -> User:
+    """Block protected access until the initial password is changed."""
+
+    if current_user.must_change_password:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Password change required before accessing this resource.",
+        )
+
+    return current_user
+
 VALID_ROLES = frozenset({
     "ADMIN",
     "HOD",
@@ -76,8 +89,8 @@ def require_roles(
         )
 
     def role_checker(
-        current_user: User = Depends(get_current_user),
-    ) -> User:
+    current_user: User = Depends(require_password_changed),
+) -> User:
 
         if current_user.role not in allowed_roles:
             raise HTTPException(

@@ -19,6 +19,11 @@ class Student(Base):
         unique=True,
         nullable=False,
     )
+    academic_class_id: Mapped[int | None] = mapped_column(
+        ForeignKey("academic_classes.id"),
+        nullable=True,
+        index=True,
+    )
 
     college_id: Mapped[str] = mapped_column(
         String(50),
