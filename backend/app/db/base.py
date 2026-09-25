@@ -1,0 +1,5 @@
+from backend.app.db.database import Base
+
+# Import models so SQLAlchemy registers their tables.
+from backend.app.models.user import User
+from backend.app.models.student import Student

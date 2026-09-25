@@ -44,3 +44,6 @@ exports/*.pdf
 # Temporary files
 *.tmp
 *.temp
+demo_admin_password.txt
+
+demo_student_password.txt
