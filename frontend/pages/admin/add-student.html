@@ -1,0 +1,195 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Add Student | AttendancePro</title>
+
+    <link rel="stylesheet" href="../../assets/css/dashboard.css">
+    <script src="../../assets/js/config.js" defer></script>
+    <script src="../../assets/js/add-student.js" defer></script>
+</head>
+
+<body>
+    <div class="dashboard-layout">
+
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">AP</div>
+                <div>
+                    <h2>AttendancePro</h2>
+                    <small>College Management</small>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav" aria-label="Admin navigation">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="students.html" class="active">Students</a>
+                <a href="#" aria-disabled="true">Teachers</a>
+                <a href="#" aria-disabled="true">Departments</a>
+                <a href="#" aria-disabled="true">Classes</a>
+                <a href="#" aria-disabled="true">Timetables</a>
+                <a href="#" aria-disabled="true">Attendance</a>
+                <a href="#" aria-disabled="true">Reports</a>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+
+            <header class="topbar">
+                <strong>Student Registration</strong>
+
+                <div class="admin-profile">
+                    <span>Administrator</span>
+                    <div class="avatar">A</div>
+                </div>
+            </header>
+
+            <section class="page-content">
+
+                <div class="page-heading">
+                    <div>
+                        <p class="welcome">Administration</p>
+                        <h1>Add New Student</h1>
+                        <p>Enter the student's registration details.</p>
+                    </div>
+
+                    <a href="students.html">Back to Students</a>
+                </div>
+
+                <section class="panel">
+
+                    <h2>Student Information</h2>
+
+                    <form id="add-student-form">
+
+                        <div class="student-form-grid">
+
+                            <div class="form-field">
+                                <label for="college-id">College ID</label>
+                                <input id="college-id"
+                                       name="college_id"
+                                       type="text"
+                                       required>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="registration-number">
+                                    Registration Number
+                                </label>
+                                <input id="registration-number"
+                                       name="registration_number"
+                                       type="text"
+                                       required>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="umis-number">UMIS Number</label>
+                                <input id="umis-number"
+                                       name="umis_number"
+                                       type="text"
+                                       required>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="student-name">Full Name</label>
+                                <input id="student-name"
+                                       name="full_name"
+                                       type="text"
+                                       autocomplete="name"
+                                       required>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="date-of-birth">
+                                    Date of Birth
+                                </label>
+                                <input id="date-of-birth"
+                                       name="date_of_birth"
+                                       type="date"
+                                       required>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="blood-group">
+                                    Blood Group
+                                </label>
+                                <select id="blood-group"
+                                        name="blood_group"
+                                        required>
+                                    <option value="">
+                                        Select Blood Group
+                                    </option>
+                                    <option>A+</option>
+                                    <option>A-</option>
+                                    <option>B+</option>
+                                    <option>B-</option>
+                                    <option>AB+</option>
+                                    <option>AB-</option>
+                                    <option>O+</option>
+                                    <option>O-</option>
+                                    <option>Unknown</option>
+                                </select>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="phone-number">
+                                    Phone Number
+                                </label>
+                                <input id="phone-number"
+                                       name="phone_number"
+                                       type="tel"
+                                       autocomplete="tel"
+                                       required>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="department">
+                                    Department
+                                </label>
+                                <select id="department"
+                                        name="department_id"
+                                        required>
+                                    <option value="">
+                                        Select Department
+                                    </option>
+                                </select>
+                            </div>
+
+                            <div class="form-field">
+                                <label for="student-class">
+                                    Class
+                                </label>
+                                <select id="student-class"
+                                        name="class_id"
+                                        required>
+                                    <option value="">
+                                        Select Class
+                                    </option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <p id="form-message"
+                           role="status"
+                           aria-live="polite"></p>
+
+                        <div class="form-actions">
+                            <a href="students.html">Cancel</a>
+
+                            <button type="submit"
+                                    id="save-student-btn"
+                                    disabled>
+                                Save Student
+                            </button>
+                        </div>
+
+                    </form>
+                </section>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

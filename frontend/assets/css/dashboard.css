@@ -302,3 +302,155 @@ th {
         flex-direction: column;
     }
 }
+
+/* Student Management */
+
+#add-student-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 22px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#add-student-btn:hover:not(:disabled) {
+    background: var(--primary-dark);
+}
+
+#add-student-btn:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+#student-search {
+    display: block;
+    width: 100%;
+    max-width: 420px;
+    margin: 12px 0 24px;
+    padding: 13px 16px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: #fffaf5;
+    font-size: 14px;
+}
+
+#student-search:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+#student-search:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+#student-status {
+    margin-top: 20px;
+    color: var(--muted);
+    font-size: 14px;
+}
+
+#students-table-body td {
+    padding: 24px 14px;
+}
+
+.sidebar-nav a[aria-disabled="true"] {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+/* Add Student Registration Form */
+
+.student-form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.form-field label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.form-field input,
+.form-field select {
+    width: 100%;
+    min-height: 46px;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: #fffaf5;
+    color: var(--text);
+    font-size: 14px;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.form-field input:invalid:not(:placeholder-shown) {
+    border-color: #dc2626;
+}
+
+#form-message {
+    margin-top: 24px;
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.form-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+    margin-top: 30px;
+}
+
+.form-actions a {
+    padding: 12px 20px;
+    color: var(--muted);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+#save-student-btn {
+    padding: 13px 24px;
+    border: none;
+    border-radius: 10px;
+    background: var(--primary);
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+#save-student-btn:hover:not(:disabled) {
+    background: var(--primary-dark);
+}
+
+#save-student-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+@media (max-width: 700px) {
+    .student-form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-actions {
+        flex-wrap: wrap;
+    }
+}

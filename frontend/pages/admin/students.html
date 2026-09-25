@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Management | AttendancePro</title>
+
+    <link rel="stylesheet" href="../../assets/css/dashboard.css">
+    <script src="../../assets/js/config.js" defer></script>
+    <script src="../../assets/js/admin-students.js" defer></script>
+</head>
+
+<body>
+    <div class="dashboard-layout">
+
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="brand-icon">AP</div>
+                <div>
+                    <h2>AttendancePro</h2>
+                    <small>College Management</small>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav" aria-label="Admin navigation">
+                <a href="dashboard.html">Dashboard</a>
+                <a href="students.html" class="active"
+                   aria-current="page">Students</a>
+                <a href="#" aria-disabled="true">Teachers</a>
+                <a href="#" aria-disabled="true">Departments</a>
+                <a href="#" aria-disabled="true">Classes</a>
+                <a href="#" aria-disabled="true">Timetables</a>
+                <a href="#" aria-disabled="true">Attendance</a>
+                <a href="#" aria-disabled="true">Semester Settings</a>
+                <a href="#" aria-disabled="true">Fine Configuration</a>
+                <a href="#" aria-disabled="true">Reports</a>
+            </nav>
+
+            <div class="sidebar-footer">
+                Face Recognition Attendance System
+            </div>
+        </aside>
+
+        <main class="main-content">
+
+            <header class="topbar">
+                <strong>Student Management</strong>
+
+                <div class="admin-profile">
+                    <span>Administrator</span>
+                    <div class="avatar">A</div>
+                </div>
+            </header>
+
+            <section class="page-content">
+
+                <div class="page-heading">
+                    <div>
+                        <p class="welcome">Administration</p>
+                        <h1>Student Management</h1>
+                        <p>Manage registered students and their profiles.</p>
+                    </div>
+
+                    <button id="add-student-btn"
+                            type="button">
+                        + Add Student
+                    </button>
+                </div>
+
+                <section class="panel">
+                    <h2>Student Directory</h2>
+
+                    <label for="student-search">
+                        Search students
+                    </label>
+
+                    <input
+                        id="student-search"
+                        type="search"
+                        placeholder="Search by name or registration number"
+                        disabled
+                    >
+
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>College ID</th>
+                                    <th>Registration No.</th>
+                                    <th>Student Name</th>
+                                    <th>Department</th>
+                                    <th>Class</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="students-table-body">
+                                <tr>
+                                    <td colspan="6">
+                                        Student records will appear
+                                        after backend integration.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <p id="student-status" role="status"
+                   aria-live="polite"></p>
+
+            </section>
+        </main>
+    </div>
+</body>
+</html>
+
