@@ -348,3 +348,112 @@ def test_invalid_payload_returns_422(
     )
 
     assert response.status_code == 422
+
+
+def history_url(record_id):
+    return f"/api/attendance-records/{record_id}/corrections"
+
+
+def test_teacher_retrieves_chronological_history(
+    correction_api_environment,
+):
+    client, _, record_id, _ = correction_api_environment
+
+    headers = login(
+        client,
+        "correction_api_teacher",
+        "TeacherTestPassword123",
+    )
+
+    for attendance_status in ["PRESENT", "OD"]:
+        response = client.patch(
+            correction_url(record_id),
+            headers=headers,
+            json=correction_payload(attendance_status),
+        )
+        assert response.status_code == 200
+
+    response = client.get(
+        history_url(record_id),
+        headers=headers,
+    )
+
+    assert response.status_code == 200
+
+    history = response.json()
+    assert len(history) == 2
+
+    assert history[0]["old_status"] == "ABSENT"
+    assert history[0]["new_status"] == "PRESENT"
+    assert history[1]["old_status"] == "PRESENT"
+    assert history[1]["new_status"] == "OD"
+
+    assert history[0]["id"] < history[1]["id"]
+
+
+def test_uncorrected_record_returns_empty_history(
+    correction_api_environment,
+):
+    client, _, record_id, _ = correction_api_environment
+
+    headers = login(
+        client,
+        "correction_api_teacher",
+        "TeacherTestPassword123",
+    )
+
+    response = client.get(
+        history_url(record_id),
+        headers=headers,
+    )
+
+    assert response.status_code == 200
+    assert response.json() == []
+
+
+def test_history_requires_authentication(
+    correction_api_environment,
+):
+    client, _, record_id, _ = correction_api_environment
+
+    response = client.get(history_url(record_id))
+
+    assert response.status_code == 401
+
+
+def test_other_teacher_cannot_view_history(
+    correction_api_environment,
+):
+    client, _, record_id, _ = correction_api_environment
+
+    headers = login(
+        client,
+        "correction_api_other",
+        "TeacherTestPassword123",
+    )
+
+    response = client.get(
+        history_url(record_id),
+        headers=headers,
+    )
+
+    assert response.status_code == 403
+
+
+def test_missing_record_history_returns_404(
+    correction_api_environment,
+):
+    client, _, _, _ = correction_api_environment
+
+    headers = login(
+        client,
+        "correction_api_teacher",
+        "TeacherTestPassword123",
+    )
+
+    response = client.get(
+        history_url(999999),
+        headers=headers,
+    )
+
+    assert response.status_code == 404

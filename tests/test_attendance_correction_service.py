@@ -23,6 +23,7 @@ from backend.app.services.attendance_correction_service import (
     CorrectionSessionClosedError,
     CorrectionUnchangedStatusError,
     correct_attendance,
+    get_attendance_correction_history,
 )
 
 
@@ -310,3 +311,84 @@ def test_multiple_corrections_preserve_history(
     assert (entries[1].old_status, entries[1].new_status) == (
         "PRESENT", "OD"
     )
+
+
+def test_teacher_retrieves_chronological_correction_history(
+    correction_environment,
+):
+    env = correction_environment
+    db = env["db"]
+
+    correct_attendance(
+        db,
+        env["record_id"],
+        correction_request("PRESENT"),
+        env["teacher_id"],
+    )
+
+    correct_attendance(
+        db,
+        env["record_id"],
+        correction_request("OD"),
+        env["teacher_id"],
+    )
+
+    history = get_attendance_correction_history(
+        db,
+        env["record_id"],
+        env["teacher_id"],
+    )
+
+    assert len(history) == 2
+    assert history[0].old_status == "ABSENT"
+    assert history[0].new_status == "PRESENT"
+    assert history[1].old_status == "PRESENT"
+    assert history[1].new_status == "OD"
+    assert history[0].id < history[1].id
+
+
+def test_uncorrected_record_has_empty_history(
+    correction_environment,
+):
+    env = correction_environment
+
+    history = get_attendance_correction_history(
+        env["db"],
+        env["record_id"],
+        env["teacher_id"],
+    )
+
+    assert history == []
+
+
+def test_other_teacher_cannot_view_correction_history(
+    correction_environment,
+):
+    env = correction_environment
+
+    correct_attendance(
+        env["db"],
+        env["record_id"],
+        correction_request(),
+        env["teacher_id"],
+    )
+
+    with pytest.raises(CorrectionPermissionError):
+        get_attendance_correction_history(
+            env["db"],
+            env["record_id"],
+            env["other_teacher_id"],
+        )
+
+
+def test_missing_record_history_is_rejected(
+    correction_environment,
+):
+    env = correction_environment
+
+    with pytest.raises(CorrectionRecordNotFoundError):
+        get_attendance_correction_history(
+            env["db"],
+            999999,
+            env["teacher_id"],
+        )

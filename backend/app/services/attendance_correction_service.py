@@ -6,6 +6,7 @@ from backend.app.models.attendance_session import AttendanceSession
 from backend.app.schemas.attendance_correction import (
     AttendanceCorrectionRequest,
 )
+from sqlalchemy import select
 
 
 class CorrectionRecordNotFoundError(ValueError):
@@ -85,3 +86,48 @@ def correct_attendance(
         raise
 
     return record
+
+
+def get_attendance_correction_history(
+    db: Session,
+    record_id: int,
+    teacher_id: int,
+) -> list[AttendanceCorrection]:
+
+    record = db.get(
+        AttendanceRecord,
+        record_id,
+    )
+
+    if record is None:
+        raise CorrectionRecordNotFoundError(
+            "Attendance record not found."
+        )
+
+    attendance_session = db.get(
+        AttendanceSession,
+        record.session_id,
+    )
+
+    if attendance_session is None:
+        raise CorrectionRecordNotFoundError(
+            "Associated attendance session not found."
+        )
+
+    if attendance_session.teacher_id != teacher_id:
+        raise CorrectionPermissionError(
+            "Only the session teacher can view correction history."
+        )
+
+    statement = (
+        select(AttendanceCorrection)
+        .where(
+            AttendanceCorrection.attendance_record_id == record_id
+        )
+        .order_by(
+            AttendanceCorrection.corrected_at.asc(),
+            AttendanceCorrection.id.asc(),
+        )
+    )
+
+    return list(db.scalars(statement).all())

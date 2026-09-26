@@ -24,3 +24,17 @@ class AttendanceCorrectionRequest(BaseModel):
         min_length=5,
         max_length=500,
     )
+
+from datetime import datetime
+
+
+class AttendanceCorrectionHistoryResponse(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    attendance_record_id: int
+    corrected_by: int
+    old_status: AttendanceStatus
+    new_status: AttendanceStatus
+    reason: str
+    corrected_at: datetime
