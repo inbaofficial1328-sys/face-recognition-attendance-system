@@ -12,6 +12,9 @@ from backend.app.api.v1.attendance_records import router as attendance_records_r
 from backend.app.api.v1.attendance_corrections import (
     router as attendance_corrections_router,
 )
+from backend.app.api.v1.attendance_summary import (
+    router as attendance_summary_router,
+)
 
 app = FastAPI(
     title="Face Recognition Attendance System",
@@ -29,6 +32,7 @@ app.include_router(teacher_assignments_router)
 app.include_router(attendance_sessions_router)
 app.include_router(attendance_records_router)
 app.include_router(attendance_corrections_router)
+app.include_router(attendance_summary_router)
 
 @app.get("/")
 async def root():
