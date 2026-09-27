@@ -9,3 +9,4 @@ from backend.app.models.teacher_assignment import TeacherAssignment
 from backend.app.models.attendance_session import AttendanceSession
 from backend.app.models.attendance_record import AttendanceRecord
 from backend.app.models.attendance_correction import AttendanceCorrection
+from backend.app.models.student_face import StudentFace

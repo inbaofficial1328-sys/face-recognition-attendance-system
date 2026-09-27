@@ -49,3 +49,9 @@ demo_admin_password.txt
 demo_student_password.txt
 
 backups/
+# Private encryption keys
+secrets/
+*.key
+
+# Downloadable face detection model
+models/face_detection/*.tflite
