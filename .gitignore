@@ -55,3 +55,12 @@ secrets/
 
 # Downloadable face detection model
 models/face_detection/*.tflite
+# Local face-recognition model binaries
+models/**/*.onnx
+models/**/*.tflite
+
+# Local backup files
+*.py.bak
+
+# Runtime enrollment lock files
+data/enrollment_locks/
