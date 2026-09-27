@@ -10,3 +10,4 @@ from backend.app.models.attendance_session import AttendanceSession
 from backend.app.models.attendance_record import AttendanceRecord
 from backend.app.models.attendance_correction import AttendanceCorrection
 from backend.app.models.student_face import StudentFace
+from backend.app.models.face_consent_audit import FaceConsentAudit

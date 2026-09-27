@@ -19,12 +19,15 @@ from backend.app.api.v1.student_attendance_reports import (
     router as student_attendance_reports_router,
 )
 
+from backend.app.api.v1.face_consent import router as face_consent_router
+
 app = FastAPI(
     title="Face Recognition Attendance System",
     description="College attendance management REST API",
     version="1.0.0",
 )
 
+app.include_router(face_consent_router)
 app.include_router(auth_router)
 app.include_router(admin_router)
 app.include_router(departments_router)

@@ -45,6 +45,12 @@ class StudentFace(Base):
         nullable=False,
     )
 
+    consent_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    consent_actor_id: Mapped[int | None] = mapped_column(ForeignKey("users.id"), nullable=True)
+    consent_reference: Mapped[str | None] = mapped_column(String(150), nullable=True)
+    consent_withdrawn_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    deletion_pending: Mapped[bool] = mapped_column(Boolean, default=False, nullable=False)
+
     enrolled_at: Mapped[datetime | None] = mapped_column(
         DateTime(timezone=True),
         nullable=True,

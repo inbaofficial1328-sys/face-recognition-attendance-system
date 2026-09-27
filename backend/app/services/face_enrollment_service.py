@@ -42,7 +42,9 @@ class FaceEnrollmentService:
                 .one_or_none()
             )
 
-            if record is None or not record.consent_recorded:
+            if (record is None or not record.consent_recorded
+                    or record.consent_withdrawn_at is not None
+                    or record.deletion_pending):
                 raise ValueError(
                     "Recorded consent is required before enrollment."
                 )
